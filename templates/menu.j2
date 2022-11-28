@@ -1,0 +1,18 @@
+{% block content %}
+<div id="menu">
+<header>
+    <div id="logo">
+        <a href="{{ url_for('index')}}"><img src="{{ url_for('static', filename='images/logo.png')}}" alt="logo" />
+        <span>Guard Dog</span></a>
+    </div>
+</header>
+<nav>
+  <ul>
+    <li><img src="{{ url_for('static', filename='images/lock-solid-blue.png')}}" alt="lock icon" /><a href="{{ url_for('accounts') }}">Accounts</a></li>
+    <li><img src="{{ url_for('static', filename='images/personal-info.png')}}" alt="profile icon" /><a href="{{ url_for('personal_info') }}">Personal Info</a></li>
+    <li><img src="{{ url_for('static', filename='images/notes.png')}}" alt="note icon" /><a href="{{ url_for('notes') }}">Notes</a></li>
+    <li><img src="{{ url_for('static', filename='images/binary-file.png')}}" alt="" /><a href="{{ url_for('password_generator') }}">Password Generator</a></li>
+  </ul>  
+</nav>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.j2' %}
+{% block content %}
+{% include 'menu.j2' %}
+<div id="personal-info">
+    <h1>Personal Info</h1>
+    <form method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <input type="text" placeholder=" Name" class="txtFld">
+        <input type="email" name="email" placeholder=" E-mail" class="txtFld"/>
+        <br>
+        <label><img src="{{ url_for('static', filename='images/camera-solid.png')}}">Upload photo <input type="file"></label>
+        <br>
+        <button>Save info</button>
+    </form>   
+ </div>
+{% endblock %}

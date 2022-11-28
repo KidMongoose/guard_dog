@@ -1,0 +1,24 @@
+{% extends 'base.j2' %}
+{% block content %}
+{% include 'menu.j2' %}
+<div id="notes">
+    <h1>Notes</h1>
+    {% if notes %}
+      <ul>
+       {% for note in notes %}
+          <li>{{ note.title }}</li>
+          <li>{{ note.category }}</li>
+          <li>{{ note.priority }}</li>
+          <li>{{ note.date_added }}</li>
+       {% endfor %}
+      </ul> 
+    {% else %}
+       <div>
+        <h2>No notes added</h2>
+        <h3>Hmmm, looks like you need to add some notes</h3>
+        <img src="" alt="">
+        <button>Add notes</button>
+       </div>
+    {% endif %}
+ </div>
+{% endblock %}

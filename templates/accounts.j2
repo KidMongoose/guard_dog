@@ -1,0 +1,24 @@
+{% extends 'base.j2' %}
+{% block content %}
+{% include 'menu.j2' %}
+<div id="accounts">
+    <h1>Accounts</h1>
+    {% if accounts %}
+      <ul>
+       {% for account in accounts %}
+          <li>{{ account.image }}{{ account.name }}</li>
+          <li>{{ account.category }}</li>
+          <li>{{ account.password }}</li>
+          <li>{{ account.last_used }}</li>
+       {% endfor %}
+      </ul> 
+    {% else %}
+    <div>
+       <h2>No accounts</h2>
+       <h3>Hmmm, looks like you need to add some accounts</h3>
+       <img src="" alt="">
+       <button>Add accounts</button>
+    </div> 
+    {% endif %}
+ </div>
+{% endblock %}

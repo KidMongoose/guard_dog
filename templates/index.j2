@@ -1,0 +1,27 @@
+{% extends 'base.j2' %}
+{% block content %}
+<div class="wrapper">
+   <div class="left-column">
+    <div id="logo">
+        <img src="{{ url_for('static', filename='images/logo.png')}}" alt="logo" />
+        <span>Guard Dog</span>
+    </div>
+    <div class="content">
+        <h1>An online Password Manager</h1>
+        <p>Features</p>
+        <p><img src="{{ url_for('static', filename='images/lock-solid.png')}}" alt="lock icon" />Generate secure password</p>
+        <p>Use combination of alphanumeric characters of various lengths to create strong passwords</p>
+      </div>   
+   </div>
+   <div class="right-column">
+     <div class="content">
+      <h3>Create an account today</h3>
+      <div><span><img src="{{ url_for('static', filename='images/twitter.png')}}" alt="twitter logo icon">Sign in with Twitter</span></div>  
+      <div><span><img src="{{ url_for('static', filename='images/google.png')}}" alt="google logo icon">Sign in with Google</span></div>  
+      <div><span><img src="{{ url_for('static', filename='images/envelope-solid.png')}}" alt="email icon">Sign in with your email</span></div> 
+      <p><img src="{{ url_for('static', filename='images/user-solid.png')}}" alt="user icon">Already have an account?</p> 
+      <button>Sign in</button>
+     </div> 
+   </div>
+</div>  
+{% endblock %}
