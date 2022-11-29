@@ -6,14 +6,17 @@ from models import *
 
 app = Flask(__name__)
 app.config['MONGO_URI'] = 'mongodb://localhost:27017/guard_dog'
-app.config['SECRET_KEY'] = 'YOUR SECRET KEY'
+app.config['SECRET_KEY'] = 'YOUR SECRET KEY HERE'
 db = PyMongo(app)
 htmx = HTMX(app)
 csrf = CSRFProtect(app)
 
 
+
 @app.route('/')
 def index():
+    password_generator = PasswordGenerator(length=48, characters='mixed')
+    print(password_generator.generate_password())
     return render_template('index.j2')
 
 @app.route('/sign-in')
