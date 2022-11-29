@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_pymongo import PyMongo
 from flask_htmx import HTMX
 from flask_wtf.csrf import CSRFProtect
@@ -15,8 +15,6 @@ csrf = CSRFProtect(app)
 
 @app.route('/')
 def index():
-    password_generator = PasswordGenerator(length=48, characters='mixed')
-    print(password_generator.generate_password())
     return render_template('index.j2')
 
 @app.route('/sign-in')
@@ -35,8 +33,11 @@ def personal_info():
 def notes():
     return render_template('notes.j2', title='Notes')
 
-@app.route('/password-generator')
+@app.route('/password-generator', methods=['GET', 'POST'])
 def password_generator():
+    if request.method == 'POST':
+        password_generator = PasswordGenerator(length=int(request.form.get('password_length')), characters=str(request.form.get('password_characters')))
+        return render_template('password_generator.j2', title='Password generator',password=password_generator.generate_password() )
     return render_template('password_generator.j2', title='Password generator')
 
 if __name__ == '__main__':

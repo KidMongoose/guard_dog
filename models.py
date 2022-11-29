@@ -8,6 +8,17 @@ class CharacterOptions(Enum):
     ALPHANUMERIC = string.ascii_letters + string.digits
     MIXED = f'{string.ascii_letters + string.digits}{"$_@!^&%*)(-?"}'
 
+class Utilities:
+    def upcase_option(self, character_option: str) -> str:
+       ''' Make all characters uppercase to compare to Enum member name '''
+       return character_option.upper()
+    
+    def detect_password_quality():
+        ''' Evaluate the strength of a users account passwords '''
+        pass
+
+
+
 class PasswordGenerator:
     def __init__(self, length, characters):
         self.length = length
@@ -20,14 +31,11 @@ class PasswordGenerator:
              the sequence to secrets.choice(). Using the length property to give the desired
              number of random characters to be returned. 
         '''
-        character_result = self.upcase_option(self.characters)
+        character_result = Utilities.upcase_option(self.characters)
         for character in (CharacterOptions):
             if character.name == character_result:
                 return ''.join(secrets.choice(character.value) for _ in range(self.length))
 
-    def upcase_option(self, character_option: str) -> str:
-        ''' Make all characters uppercase to compare to Enum member name '''
-        return character_option.upper()
 
 
             
