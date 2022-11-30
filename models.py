@@ -1,12 +1,35 @@
 import secrets
 from enum import Enum
 import string
+from pydantic import BaseModel, EmailStr
+from datetime import datetime
 
 class CharacterOptions(Enum):
     LETTERS = string.ascii_letters
     NUMBERS = string.digits
     ALPHANUMERIC = string.ascii_letters + string.digits
     MIXED = f'{string.ascii_letters + string.digits}{"$_@!^&%*)(-?"}'
+
+class PersonalInfo(BaseModel):
+    name: str
+    email: EmailStr
+    profile_image: str
+    account_creation: datetime = datetime.now()
+
+class Notes(BaseModel):
+    title: str
+    category: str
+    date_added: datetime = datetime.now()
+    priority: str
+
+class Accounts(BaseModel):
+    name: str
+    last_used: datetime = datetime.now()
+    password: str
+    category: str
+    image: str
+    password_quality: str
+
 
 class Utilities:
     def upcase_option(self, character_option: str) -> str:
@@ -16,7 +39,6 @@ class Utilities:
     def detect_password_quality():
         ''' Evaluate the strength of a users account passwords '''
         pass
-
 
 
 class PasswordGenerator:

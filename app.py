@@ -7,7 +7,7 @@ from models import *
 app = Flask(__name__)
 app.config['MONGO_URI'] = 'mongodb://localhost:27017/guard_dog'
 app.config['SECRET_KEY'] = 'YOUR SECRET KEY HERE'
-db = PyMongo(app)
+mongo = PyMongo(app)
 htmx = HTMX(app)
 csrf = CSRFProtect(app)
 
@@ -25,8 +25,14 @@ def sign_in():
 def accounts():
     return render_template('accounts.j2', title='Accounts')
 
-@app.route('/personal-info')
+@app.route('/personal-info', methods=['GET', 'POST'])
 def personal_info():
+    if request.method == 'POST':
+        img = request.form.get('img')
+        name = request.form.get('name')
+        email = request.form.get('email')
+        personal_info = mongo.db.accounts.insert_one({'name' : name, 'email' : email, 'profile_image' : img})
+        #return render_template('')
     return render_template('personal_info.j2', title='Personal Info')
 
 @app.route('/notes')
