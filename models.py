@@ -32,7 +32,7 @@ class Accounts(BaseModel):
 
 
 class Utilities:
-    def upcase_option(self, character_option: str) -> str:
+    def upcase_option(character_option: str) -> str:
        ''' Make all characters uppercase to compare to Enum member name '''
        return character_option.upper()
     
