@@ -13,8 +13,6 @@ mongo = PyMongo(app)
 htmx = HTMX(app)
 csrf = CSRFProtect(app)
 
-
-
 @app.route('/')
 def index():
     return render_template('index.j2')
@@ -27,7 +25,7 @@ def sign_in():
 def accounts():
     return render_template('accounts.j2', title='Accounts')
 
-@app.route('/add/account/<id: uuid>')
+@app.route('/add/account/<uuid:id>')
 def add_account():
     if request.method == 'POST':
         name = request.form.get('name')
@@ -65,7 +63,7 @@ def personal_info():
 def notes():
     return render_template('notes.j2', title='Notes')
 
-@app.route('/add/notes/<id: uuid>')
+@app.route('/add/notes/<uuid:id>')
 def add_notes():
     if request.method == 'POST':    
         title = request.form.get('title')
@@ -89,8 +87,6 @@ def password_generator():
         password_generator = PasswordGenerator(length=int(request.form.get('password_length')), characters=str(request.form.get('password_characters')))
         return render_template('password_generator.j2', title='Password generator', password=password_generator.generate_password() )
     return render_template('password_generator.j2', title='Password generator')
-
-
 
 
 if __name__ == '__main__':

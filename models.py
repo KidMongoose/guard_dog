@@ -3,12 +3,17 @@ from enum import Enum
 import string
 from pydantic import BaseModel, EmailStr
 from datetime import datetime
+import re
 
 class CharacterOptions(Enum):
     LETTERS = string.ascii_letters
     NUMBERS = string.digits
     ALPHANUMERIC = string.ascii_letters + string.digits
     MIXED = f'{string.ascii_letters + string.digits}{"$_@!^&%*)(-?"}'
+
+class PasswordStrength(Enum):
+    VERY_STRONG_LENGTH  = 16
+    STRONG_LENGTH = 10
 
 class PersonalInfo(BaseModel):
     name: str
@@ -35,10 +40,20 @@ class Utilities:
     def upcase_option(character_option: str) -> str:
        ''' Make all characters uppercase to compare to Enum member name '''
        return character_option.upper()
+
     
-    def detect_password_quality():
+    def detect_password_quality(password: str):
         ''' Evaluate the strength of a users account passwords '''
-        pass
+        very_strong = re.match('((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!#@$%^&*(_)+]).{16,48})', password)
+        strong = re.match('((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!#@$%^&*(_)+]).{10,16})', password)
+        weak = re.match('((\d*)([a-z]*)([A-Z]*)(![!#@$%^&*(_)+]).{8,10})', password)
+        if len(password) >= PasswordStrength.VERY_STRONG_LENGTH.value and bool(very_strong) == True:
+            print('very strong')
+        elif len(password) < PasswordStrength.VERY_STRONG_LENGTH.value and bool(strong) == True:
+            print('strong') 
+        else:
+            print('weak')
+
 
 
 class PasswordGenerator:
